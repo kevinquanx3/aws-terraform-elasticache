@@ -16,7 +16,7 @@ module "vpc" {
 }
 
 module "internal_zone" {
-  source        = "git@github.com:rackspace-infrastructure-automation/aws-terraform-route53_internal_zone?ref=v.0.0.1"
+  source        = "git@github.com:rackspace-infrastructure-automation/aws-terraform-route53_internal_zone?ref=v0.0.3"
   zone_name     = "example.com"
   environment   = "Development"
   target_vpc_id = "${module.vpc.vpc_id}"
@@ -78,7 +78,7 @@ module "elasticache_redis_1" {
   redis_multi_shard       = false
   subnets                 = ["${module.vpc.private_subnets}"]
   security_group_list     = ["${module.security_groups.elastic_cache_redis_security_group_id}"]
-  internal_record_name    = "redisconfig"
+  internal_record_name    = "redisconfigone"
   create_route53_record   = true
   internal_zone_id        = "${module.internal_zone.internal_hosted_zone_id}"
   internal_zone_name      = "${module.internal_zone.internal_hosted_name}"
@@ -98,7 +98,7 @@ module "elasticache_redis_2" {
   redis_multi_shard          = false
   subnets                    = ["${module.vpc.private_subnets}"]
   security_group_list        = ["${module.security_groups.elastic_cache_redis_security_group_id}"]
-  internal_record_name       = "redisconfig"
+  internal_record_name       = "redisconfigtwo"
   create_route53_record      = true
   internal_zone_id           = "${module.internal_zone.internal_hosted_zone_id}"
   internal_zone_name         = "${module.internal_zone.internal_hosted_name}"
